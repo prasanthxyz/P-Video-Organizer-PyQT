@@ -60,9 +60,9 @@ class Main(QMainWindow):
             self.rps_config.gallery_images[gallery])
 
         self.main_widget.view_tab_widget.display_media_widget.tgp_vid_container_widget.set_video(
-            str(Path(self.rps_config.static_path) / "VID" / video))
+            str(Path(self.rps_config.vid_path) / video))
         self.main_widget.view_tab_widget.display_media_widget.tgp_vid_container_widget.set_tgp(
-            str(Path(self.rps_config.static_path) / "VID" / "img" / (video + ".jpg")))
+            str(Path(self.rps_config.vid_path) / "img" / (video + ".jpg")))
 
     def keyPressEvent(self, event: Any) -> None:
         if event.key() in range(Qt.Key_0, Qt.Key_9 + 1):  # Keys 1 to 9

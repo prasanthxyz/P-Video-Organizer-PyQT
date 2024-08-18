@@ -15,7 +15,8 @@ class RpsConfig:
 
         config_data = self._get_config_data()
 
-        self.static_path = config_data["static_path"]
+        self.vid_path = config_data["vid_path"]
+        self.nam_path = config_data["nam_path"]
 
         self.video_names = self._get_video_names()
         self.gallery_names = self._get_gallery_names()
@@ -29,14 +30,13 @@ class RpsConfig:
             self.gallery_images[gallery_name] = self._get_gallery_images(gallery_name)
 
     def _get_video_names(self) -> List[str]:
-        """Get video filenames from static path
+        """Get video filenames from vid path
 
         Returns:
             List[str]: Video filenames
         """
-        videos_path = Path(self.static_path) / 'VID'
         video_names = []
-        for video_path in videos_path.iterdir():
+        for video_path in Path(self.vid_path).iterdir():
             if video_path.is_file() and video_path.name[0] != '.':
                 video_names.append(video_path.name)
         return video_names
@@ -47,9 +47,8 @@ class RpsConfig:
         Returns:
             List[str]: Gallery directory names
         """
-        galleries_path = Path(self.static_path) / 'NAM'
         gallery_names = []
-        for gallery_path in galleries_path.iterdir():
+        for gallery_path in Path(self.nam_path).iterdir():
             if gallery_path.is_dir() and gallery_path.name[0] != '.':
                 gallery_names.append(gallery_path.name)
         return gallery_names
@@ -101,7 +100,7 @@ class RpsConfig:
             KeyError: if required keys not found in config
 
         Returns:
-            dict[str, Any]: static path where the media files are located
+            dict[str, Any]: config data with media info
         """
         config_file = Path.home() / 'pvorg-qt.json'
         if not config_file.exists():
@@ -110,10 +109,12 @@ class RpsConfig:
         config_data = {}
         with config_file.open() as file:
             data = json.loads(file.read())
-            if "staticPath" in data:
-                config_data["static_path"] = data["staticPath"]
-            else:
-                raise KeyError("'staticPath' not found in config")
+            if "namPath" not in data or "vidPath" not in data:
+                raise KeyError("'vidPath'/'namPath' not found in config")
+
+            config_data["nam_path"] = data["namPath"]
+            config_data["vid_path"] = data["vidPath"]
+
             if "videoRelations" in data:
                 config_data["video_relations"] = data["videoRelations"]
             else:
@@ -128,7 +129,7 @@ class RpsConfig:
     def _get_gallery_images(self, gallery_name: str) -> List[str]:
         image_list = []
         image_exts = ('.png', '.jpg', '.jpeg', '.bmp', '.gif')
-        gallery_path = Path(self.static_path) / "NAM" / gallery_name
+        gallery_path = Path(self.nam_path) / gallery_name
         for filename in gallery_path.iterdir():
             if filename.suffix.lower() in image_exts:
                 image_list.append(str(filename))
