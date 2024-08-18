@@ -1,8 +1,9 @@
 from PyQt5.QtCore import Qt, QUrl
-from PyQt5.QtWidgets import QVBoxLayout, QLabel, QPushButton, QSlider, QHBoxLayout, QWidget
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5.QtMultimediaWidgets import QVideoWidget
+from PyQt5.QtWidgets import (QHBoxLayout, QLabel, QPushButton, QSlider,
+                             QVBoxLayout, QWidget)
 
 
 class TgpVidContainerWidget(QWidget):

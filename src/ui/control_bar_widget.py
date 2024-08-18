@@ -1,5 +1,7 @@
 from typing import Callable
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
+
+from PyQt5.QtWidgets import (QHBoxLayout, QLabel, QPushButton, QSizePolicy,
+                             QSpacerItem, QWidget)
 
 
 class ControlBarWidget(QWidget):

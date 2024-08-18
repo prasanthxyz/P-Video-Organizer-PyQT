@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout
+from PyQt5.QtWidgets import QHBoxLayout, QWidget
+
 from ui.gallery_container_widget import GalleryContainerWidget
 from ui.tgp_vid_container_widget import TgpVidContainerWidget
 

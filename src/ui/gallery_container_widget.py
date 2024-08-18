@@ -1,7 +1,8 @@
 from typing import List
+
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout
+from PyQt5.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 
 class GalleryContainerWidget(QWidget):

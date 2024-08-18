@@ -1,5 +1,6 @@
 from typing import Callable
-from PyQt5.QtWidgets import QWidget, QVBoxLayout
+
+from PyQt5.QtWidgets import QVBoxLayout, QWidget
 
 from ui.control_bar_widget import ControlBarWidget
 from ui.display_media_widget import DisplayMediaWidget

@@ -1,12 +1,12 @@
-from typing import Any, Set
-from PyQt5.QtCore import Qt
-from pathlib import Path
 import sys
+from pathlib import Path
+from typing import Any, Set
+
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
 
 from rps.combs import get_combinations
 from rps.rps_config import RpsConfig
-
 from ui.main_widget import MainWidget
 
 
