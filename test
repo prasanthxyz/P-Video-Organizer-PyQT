@@ -1,0 +1,43 @@
+#!/bin/bash
+
+FAILURE_HAPPENED=0
+
+notify_failure() {
+    COMPONENT="$*"
+    cat <<EOF
+****************
+* ❌⛔💩 FAILURE in ${COMPONENT} -- see above for details ❌⛔💩
+****************
+
+EOF
+}
+
+FAILED_COMPONENTS=
+
+echo "Flake8..."
+if ! flake8; then
+    notify_failure flake8
+    FAILED_COMPONENTS="${FAILED_COMPONENTS} flake8"
+    FAILURE_HAPPENED=1
+fi
+
+echo "PyLint..."
+if ! pylint src; then
+    notify_failure pylint
+    FAILED_COMPONENTS="${FAILED_COMPONENTS} pylint"
+    FAILURE_HAPPENED=1
+fi
+
+echo "MyPy..."
+if ! mypy; then
+    notify_failure mypy
+    FAILED_COMPONENTS="${FAILED_COMPONENTS} mypy"
+    FAILURE_HAPPENED=1
+fi
+
+case $FAILURE_HAPPENED in
+    0) ;;
+    *) notify_failure "${FAILED_COMPONENTS}"
+esac
+
+exit $FAILURE_HAPPENED
